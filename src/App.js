@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import Button from "@material-ui/core/Button";
+import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import React from "react";
+import { theme } from "./theme/themes";
+// import Button from "../src/components/atoms/Button";
+const useStyles = makeStyles((theme) => ({
+  // root: {
+  //   color: theme.status.danger,
+  //   "&$checked": {
+  //     color: theme.status.danger,
+  //   },
+  // },
+  // checked: {},
+}));
 
-function App() {
+function CustomCheckbox() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Button color="secondary" children="pro" variant="contained" />
+      <Button color="primary" children="pro" variant="contained" />
+    </>
   );
 }
 
-export default App;
+// const theme = createMuiTheme({
+//   status: {
+//     danger: orange[500],
+//   },
+// });
+
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CustomCheckbox />
+    </ThemeProvider>
+  );
+}
