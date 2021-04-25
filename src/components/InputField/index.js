@@ -6,7 +6,6 @@ import { Controller } from "react-hook-form";
 InputField.propTypes = {
   form: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
-
   label: PropTypes.string,
   disabled: PropTypes.bool,
 };
