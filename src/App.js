@@ -11,14 +11,7 @@ import routers from "./routers";
 import { themeConfig } from "./theme/themes";
 
 export default function App() {
-  // const dispatch = useDispatch();
-  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  // console.log(prefersDarkMode, "media");
-  // useEffect(() => {
-  //   dispatch(toggleDarkMode(prefersDarkMode));
-  // }, [prefersDarkMode]);
   const isDarkMode = useSelector((state) => state.system.isDarkMode);
-  console.log(isDarkMode);
   const theme = themeConfig({ isDarkMode });
   const showRouter = (routes) => {
     let result = routes.map((route, index) => {

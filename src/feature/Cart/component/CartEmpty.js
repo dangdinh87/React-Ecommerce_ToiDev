@@ -6,7 +6,7 @@ import { CART_EMPTY } from "../../../constants";
 function CartEmpty(props) {
   const history = useHistory();
   return (
-    <Box textAlign="center" bgcolor="#ffffff" pb={8}>
+    <Box textAlign="center" bgcolor="primary.main" pb={8}>
       <img
         style={{ width: "300px", minHeight: "300px" }}
         src={CART_EMPTY}
