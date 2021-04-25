@@ -1,23 +1,39 @@
 import { createMuiTheme } from "@material-ui/core";
 
-export const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#c54646",
-      light: " #b18080",
-      dark: "#bb1e1e",
+export function themeConfig({ theme, isDarkMode }) {
+  return createMuiTheme({
+    palette: {
+      type: isDarkMode ? "dark" : "light",
+      secondary: {
+        main: isDarkMode ? "#d32f2f" : "#e74764",
+      },
+      primary: {
+        main: isDarkMode ? "#00695f" : "#2A9D8F",
+      },
+      warning: {
+        light: "#ffb74d",
+        main: "#ff9800",
+        dark: "#f57c00",
+      },
+      background: {
+        paper: isDarkMode ? "#303030" : "#ffffff",
+        default: isDarkMode ? "#424242" : "#efefef",
+      },
     },
-    secondary: {
-      main: "#5de60e",
-      dark: "#099136",
-      light: "#c1eca3",
+    typography: {
+      fontFamily: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+      fontSize: 14,
     },
-  },
-  typography: {
-    fontFamily: "Comic Sans MS",
-    body2: {
-      fontFamily: "Times New Roman",
-      fontSize: "1rem",
-    },
-  },
-});
+  });
+}

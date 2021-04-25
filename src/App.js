@@ -1,39 +1,45 @@
-import Button from "@material-ui/core/Button";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { ThemeProvider } from "@material-ui/core/styles";
 import React from "react";
-import { theme } from "./theme/themes";
-// import Button from "../src/components/atoms/Button";
-const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   color: theme.status.danger,
-  //   "&$checked": {
-  //     color: theme.status.danger,
-  //   },
-  // },
-  // checked: {},
-}));
-
-function CustomCheckbox() {
-  const classes = useStyles();
-
-  return (
-    <>
-      <Button color="secondary" children="pro" variant="contained" />
-      <Button color="primary" children="pro" variant="contained" />
-    </>
-  );
-}
-
-// const theme = createMuiTheme({
-//   status: {
-//     danger: orange[500],
-//   },
-// });
+import { useSelector } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Header from "./components/Header";
+import routers from "./routers";
+import { themeConfig } from "./theme/themes";
 
 export default function App() {
+  // const dispatch = useDispatch();
+  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  // console.log(prefersDarkMode, "media");
+  // useEffect(() => {
+  //   dispatch(toggleDarkMode(prefersDarkMode));
+  // }, [prefersDarkMode]);
+  const isDarkMode = useSelector((state) => state.system.isDarkMode);
+  console.log(isDarkMode);
+  const theme = themeConfig({ isDarkMode });
+  const showRouter = (routes) => {
+    let result = routes.map((route, index) => {
+      return (
+        <Route
+          path={route.path}
+          exact={route.exact}
+          component={route.main}
+          key={index}
+        />
+      );
+    });
+    return <Switch>{result}</Switch>;
+  };
   return (
-    <ThemeProvider theme={theme}>
-      <CustomCheckbox />
-    </ThemeProvider>
+    <Router>
+      <ToastContainer position="top-right" />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Header />
+        {showRouter(routers)}
+      </ThemeProvider>
+    </Router>
   );
 }
