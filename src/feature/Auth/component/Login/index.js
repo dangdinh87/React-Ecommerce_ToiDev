@@ -14,9 +14,7 @@ function Login({ handleClose }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
-    console.log(values);
     try {
-      console.log(values);
       const action = login(values);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);

@@ -56,14 +56,14 @@ function FilterByPrice({ onChange }) {
       <Typography variant="subtitle1">MỨC GIÁ</Typography>
       <Box className={classes.range}>
         <TextField
-          placeholder="0"
+          placeholder="Từ"
           name="salePrice_gte"
           value={values.salePrice_gte}
           onChange={handleChange}
         />
         <span>-</span>
         <TextField
-          placeholder="0"
+          placeholder="Đến"
           name="salePrice_lte"
           value={values.salePrice_lte}
           onChange={handleChange}

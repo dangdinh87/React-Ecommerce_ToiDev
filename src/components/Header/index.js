@@ -1,4 +1,13 @@
-import { Badge, Box, Container, Fade } from "@material-ui/core";
+import {
+  Badge,
+  Box,
+  Container,
+  CssBaseline,
+  Fab,
+  Fade,
+  useScrollTrigger,
+  Zoom,
+} from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -14,15 +23,16 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import BookOutlinedIcon from "@material-ui/icons/BookOutlined";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import React, { useState } from "react";
+import DarkModeToggle from "react-dark-mode-toggle";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import Login from "../../feature/Auth/component/Login";
-import DarkModeToggle from "react-dark-mode-toggle";
 import Register from "../../feature/Auth/component/Register";
 import { logout } from "../../feature/Auth/useSlice";
 import { hideMiniCart } from "../../feature/Cart/cartSlice";
 import { cartItemCountSelector } from "../../feature/Cart/selectors";
 import { toggleDarkMode } from "../../feature/System/systemSlice";
+import SearchBar from "../SearchBar";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -32,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     textDecoration: "none",
-    color: theme.palette.secondary.light,
-    fontSize: 16,
+    color: theme.palette.background.default,
+    fontSize: 20,
     textTransform: "uppercase",
     margin: 5,
   },
@@ -71,8 +81,12 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginBottom: theme.spacing(2),
   },
+  flexMenuRight: {
+    flexWrap: "row nowrap",
+  },
 }));
-export default function ButtonAppBar() {
+
+export default function ButtonAppBar(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const MODE = { LOGIN: "login", REGISTER: "register" };
@@ -105,135 +119,143 @@ export default function ButtonAppBar() {
   const goToCart = () => {
     history.push("/cart");
   };
+
+  const ElevationScroll = (props) => {
+    const { children, window } = props;
+
+    // Note that you normally won't need to set the window ref as useScrollTrigger
+    // will default to window.
+    // This is only being set here because the demo is in an iframe.
+    const trigger = useScrollTrigger({
+      disableHysteresis: true,
+      threshold: 0,
+      target: window ? window() : undefined,
+    });
+
+    return React.cloneElement(children, {
+      elevation: trigger ? 5 : 0,
+    });
+  };
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Container>
-          <Toolbar>
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              xs
-              item
-            >
-              <IconButton className={classes.menuButton} color="inherit">
-                <BookOutlinedIcon />
-              </IconButton>
-              <Typography variant="h6" className={classes.title}>
-                BOOK STORE
-              </Typography>
-            </Grid>
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              item
-              xs={8}
-            >
-              <NavLink
-                to="/"
-                exact
-                className={classes.link}
-                activeClassName={classes.link_active}
+      <CssBaseline />
+      <ElevationScroll {...props}>
+        <AppBar>
+          <Container>
+            <Toolbar>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
+                xs={3}
+                item
               >
-                Home Page
-              </NavLink>
-              <NavLink
-                to="/todo"
-                exact
-                className={classes.link}
-                activeClassName={classes.link_active}
-              >
-                To Do
-              </NavLink>
-              <NavLink
-                to="/products"
-                exact
-                className={classes.link}
-                activeClassName={classes.link_active}
-              >
-                Product
-              </NavLink>
-            </Grid>
-            <Grid
-              item
-              xs
-              container
-              direction="row"
-              justify="flex-end"
-              alignItems="center"
-            >
-              {isLogin ? (
-                <>
-                  <p>{userLogin.current.fullName}</p>
-                  <IconButton
-                    className={classes.menuButton}
-                    onClick={handleClick}
-                    color="inherit"
+                <IconButton className={classes.menuButton} color="inherit">
+                  <BookOutlinedIcon />
+                </IconButton>
+                <Typography variant="h6">
+                  <NavLink
+                    to="/products"
+                    exact
+                    className={classes.link}
+                    // activeClassName={classes.link_active}
                   >
-                    <AccountCircleIcon />
-                  </IconButton>
-                </>
-              ) : (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleClickOpen}
-                >
-                  register
-                </Button>
-              )}
-              <IconButton
-                aria-label="show cart"
-                color="inherit"
-                onClick={goToCart}
+                    TOI DEV
+                  </NavLink>
+                </Typography>
+              </Grid>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                item
+                xs={true}
               >
-                <Badge badgeContent={cartItemCount} color="secondary">
-                  <ShoppingCart />
-                </Badge>
-              </IconButton>
-              {isShowMessage && (
-                <Fade in={isShowMessage} timeout={500}>
-                  <Box
-                    boxShadow={1}
-                    className={classes.messageCart}
-                    onClick={handleCloseMiniCart}
-                  >
-                    <Box className={classes.messageCartSub}>
-                      <CheckCircleIcon fontSize="small" color="primary" />
-                      <Box
-                        variant="body2"
-                        align="center"
-                        className={classes.cartTitle}
-                      >
-                        Thêm giỏ hàng thành công
-                      </Box>
-                    </Box>
-                    <Button
-                      onClick={goToCart}
-                      variant="contained"
-                      size="small"
-                      color="primary"
-                      fullWidth
+                <SearchBar />
+              </Grid>
+              <Grid
+                wrap="nowrap"
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="center"
+                xs={3}
+              >
+                {isLogin ? (
+                  <>
+                    <Grid zeroMinWidth>
+                      <Typography noWrap>
+                        {userLogin.current.fullName}
+                      </Typography>
+                    </Grid>
+
+                    <IconButton
+                      className={classes.menuButton}
+                      onClick={handleClick}
+                      color="inherit"
                     >
-                      Xem giỏ hàng
-                    </Button>
-                  </Box>
-                </Fade>
-              )}
-            </Grid>
-            <DarkModeToggle
-              onChange={() => dispatch(toggleDarkMode())}
-              checked={isDarkMode}
-              speed={1}
-              size={50}
-            />
-          </Toolbar>
-        </Container>
-      </AppBar>
+                      <AccountCircleIcon />
+                    </IconButton>
+                  </>
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleClickOpen}
+                  ></Button>
+                )}
+                <IconButton
+                  aria-label="show cart"
+                  color="inherit"
+                  onClick={goToCart}
+                >
+                  <Badge badgeContent={cartItemCount} color="secondary">
+                    <ShoppingCart />
+                  </Badge>
+                </IconButton>
+                {isShowMessage && (
+                  <Fade in={isShowMessage} timeout={500}>
+                    <Box
+                      boxShadow={1}
+                      className={classes.messageCart}
+                      onClick={handleCloseMiniCart}
+                    >
+                      <Box className={classes.messageCartSub}>
+                        <CheckCircleIcon fontSize="small" color="primary" />
+                        <Box
+                          variant="body2"
+                          align="center"
+                          className={classes.cartTitle}
+                        >
+                          Thêm giỏ hàng thành công
+                        </Box>
+                      </Box>
+                      <Button
+                        onClick={goToCart}
+                        variant="contained"
+                        size="small"
+                        color="primary"
+                        fullWidth
+                      >
+                        Xem giỏ hàng
+                      </Button>
+                    </Box>
+                  </Fade>
+                )}
+                <DarkModeToggle
+                  onChange={() => dispatch(toggleDarkMode())}
+                  checked={isDarkMode}
+                  speed={1}
+                  size={50}
+                />
+              </Grid>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </ElevationScroll>
+      <Toolbar id="back-to-top-anchor" />
       <Dialog
         open={open}
         onClose={handleClose}
