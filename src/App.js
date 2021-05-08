@@ -24,13 +24,9 @@ export default function App(props) {
   }));
 
   function ScrollTop(props) {
-    const { children, window } = props;
+    const { children } = props;
     const classes = useStyles();
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
     const trigger = useScrollTrigger({
-      target: window ? window() : undefined,
       disableHysteresis: true,
       threshold: 100,
     });
@@ -70,13 +66,13 @@ export default function App(props) {
   };
   return (
     <Router>
-      <ToastContainer position="top-right" />
       <ThemeProvider theme={theme}>
+        <ToastContainer position="top-right" />
         <CssBaseline />
         <Header />
         {showRouter(routers)}
         <ScrollTop {...props}>
-          <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <Fab color="primary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
         </ScrollTop>

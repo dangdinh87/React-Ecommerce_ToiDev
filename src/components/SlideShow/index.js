@@ -30,7 +30,7 @@ function ArrowRight(props) {
     </svg>
   );
 }
-export default function SlideShow(props) {
+export default function SlideShow({ listSlide }) {
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [pause, setPause] = React.useState(false);
   const timer = React.useRef();

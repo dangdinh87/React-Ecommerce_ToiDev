@@ -11,6 +11,7 @@ import { useHistory, useLocation } from "react-router";
 import queryString from "query-string";
 import Alert from "@material-ui/lab/Alert";
 import SlideShow from "../../../components/SlideShow";
+import EmptyProduct from "../components/EmptyProduct";
 
 const useStyles = makeStyles((theme) => ({
   left: {
@@ -72,7 +73,6 @@ function ListPage(props) {
     (async () => {
       try {
         const { data, pagination } = await productApi.getAll(queryParams);
-
         setProductList(data);
         setPagination(pagination);
       } catch (error) {
@@ -155,18 +155,21 @@ function ListPage(props) {
               />
               {loading ? (
                 <ProductSkeletonList length={12} />
+              ) : productList.length <= 0 ? (
+                <EmptyProduct />
               ) : (
                 <ProductList data={productList} />
               )}
-              <Pagination
-                className={classes.pagination}
-                count={Math.ceil(pagination.total / pagination.limit)}
-                variant="outlined"
-                shape="rounded"
-                page={pagination.page}
-                onChange={handleChangePagination}
-              />
-              3
+              {Math.ceil(pagination.total / pagination.limit) >= 1 && (
+                <Pagination
+                  className={classes.pagination}
+                  count={Math.ceil(pagination.total / pagination.limit)}
+                  variant="outlined"
+                  shape="rounded"
+                  page={pagination.page}
+                  onChange={handleChangePagination}
+                />
+              )}
             </Paper>
           </Grid>
         </Grid>

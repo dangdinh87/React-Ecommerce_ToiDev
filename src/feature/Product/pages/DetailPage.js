@@ -71,7 +71,6 @@ function DetailPage() {
   return (
     <Box className={classes.root}>
       <Container>
-      
         <Paper elevation={0}>
           <Grid container>
             <Grid item className={classes.left}>

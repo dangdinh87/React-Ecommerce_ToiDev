@@ -1,14 +1,13 @@
 import React from "react";
-import Todo from "./components/Todo";
-import HomePage from "./components/HomePage";
 import NotFound from "./components/NotFound";
-import ProductFeature from "./feature/Product";
+import Todo from "./components/Todo";
 import CartFeature from "./feature/Cart";
+import ProductFeature from "./feature/Product";
 const routes = [
   {
     path: "/",
     exact: true,
-    main: () => <HomePage />,
+    main: () => <ProductFeature />,
   },
   {
     path: "/products",
