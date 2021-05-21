@@ -4,7 +4,7 @@ import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Zoom from "@material-ui/core/Zoom";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { default as React } from "react";
+import { default as React, useMemo } from "react";
 import MessengerCustomerChat from "react-messenger-customer-chat";
 import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -50,7 +50,7 @@ export default function App(props) {
     );
   }
   const isDarkMode = useSelector((state) => state.system.isDarkMode);
-  const theme = themeConfig({ isDarkMode });
+  const theme = useMemo(() => themeConfig({ isDarkMode }), [isDarkMode]);
   const showRouter = (routes) => {
     let result = routes.map((route, index) => {
       return (

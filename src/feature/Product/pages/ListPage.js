@@ -32,10 +32,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ListPage(props) {
+  const [productList, setProductList] = useState([]);
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
   const location = useLocation();
   const queryParams = useMemo(() => {
     const params = queryString.parse(location.search);
+    setLoading(true);
     return {
       ...params,
       _page: Number.parseInt(params._page) || 1,
@@ -52,8 +55,7 @@ function ListPage(props) {
     page: 1,
     total: 10,
   });
-  const [productList, setProductList] = useState([]);
-  const [loading, setLoading] = useState(true);
+
   // const [filters, setFilters] = useState({
   //   ...queryParams,
   //   _page: Number.parseInt(queryParams._page) || 1,

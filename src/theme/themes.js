@@ -1,14 +1,14 @@
 import { createMuiTheme } from "@material-ui/core";
 
-export function themeConfig({ theme, isDarkMode }) {
+export function themeConfig({ isDarkMode }) {
   return createMuiTheme({
     palette: {
       type: isDarkMode ? "dark" : "light",
       secondary: {
-        main: isDarkMode ? "#d32f2f" : "#e74764",
+        main: "#e74764",
       },
       primary: {
-        main: isDarkMode ? "#00695f" : "#2A9D8F",
+        main: "#2A9D6F",
       },
       warning: {
         light: "#ffb74d",

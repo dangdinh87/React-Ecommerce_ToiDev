@@ -144,7 +144,7 @@ export default function ButtonAppBar(props) {
     history.push("/cart");
   };
 
-  const handleSearch = () => {};
+  console.log("Render");
 
   return (
     <div className={classes.root}>
