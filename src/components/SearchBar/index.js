@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   inputInput: {
     flex: 1,
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
+
     paddingLeft: theme.spacing(2),
     transition: theme.transitions.create("width"),
 
@@ -60,23 +60,11 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
-  // sectionDesktop: {
-  //   display: "none",
-  //   [theme.breakpoints.up("md")]: {
-  //     display: "flex",
-  //   },
-  // },
-  // sectionMobile: {
-  //   display: "flex",
-  //   [theme.breakpoints.up("md")]: {
-  //     display: "none",
-  //   },
-  // },
 }));
 
 function SearchBar({ onShowOverlay }) {
   const [listHistory, setListHistory] = useState(
-    JSON.parse(localStorage.getItem("history_search") || [])
+    JSON.parse(localStorage.getItem("history_search")) || []
   );
 
   const [value, setValue] = useState(null);
@@ -95,7 +83,7 @@ function SearchBar({ onShowOverlay }) {
   const handleFocusSearch = () => {
     setShowHistory(true);
     onShowOverlay((x) => !x);
-    setListHistory(JSON.parse(localStorage.getItem("history_search")) || []);
+    setListHistory(JSON.parse(localStorage.getItem("history_search")) ||[]);
   };
 
   const handleSearch = (e) => {

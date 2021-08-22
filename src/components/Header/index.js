@@ -164,9 +164,6 @@ export default function ButtonAppBar(props) {
               xs={3}
               item
             >
-              <IconButton className={classes.menuButton} color="inherit">
-                <BookOutlinedIcon />
-              </IconButton>
               <Typography variant="h6">
                 <NavLink
                   to="/products"
@@ -216,7 +213,7 @@ export default function ButtonAppBar(props) {
                   color="secondary"
                   onClick={handleClickOpen}
                 >
-                  Đăng Nhập / Đăng Kí
+                  Đăng Nhập
                 </Button>
               )}
               <Tooltip title="Giỏ hàng">

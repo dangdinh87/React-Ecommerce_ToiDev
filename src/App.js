@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
 import routers from "./routers";
 import { themeConfig } from "./theme/themes";
+import Footer from "./components/Footer";
 
 export default function App(props) {
   const useStyles = makeStyles((theme) => ({
@@ -71,6 +72,7 @@ export default function App(props) {
         <CssBaseline />
         <Header />
         {showRouter(routers)}
+        <Footer />
         <ScrollTop {...props}>
           <Fab color="primary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
