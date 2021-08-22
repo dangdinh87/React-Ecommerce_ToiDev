@@ -130,7 +130,7 @@ function ListPage(props) {
     });
   };
   return (
-    <Box>
+    <Box mb={6}>
       <Container>
         <Box mb={1}>
           <SlideShow />

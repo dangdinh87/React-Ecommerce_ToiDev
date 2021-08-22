@@ -61,7 +61,7 @@ export default function CartFeature() {
   const classes = useStyles();
 
   return (
-    <Box mt={2} className={classes.root}>
+    <Box mt={2} mb={6} className={classes.root}>
       <Container>
         <Box>
           <Typography display="inline" variant="subtitle1">

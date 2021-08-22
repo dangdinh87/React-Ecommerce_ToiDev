@@ -1,8 +1,21 @@
-import { AppBar, Container, Toolbar, Typography } from "@material-ui/core";
-
+import {
+  AppBar,
+  Container,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    top: "auto",
+    bottom: 0,
+  },
+}));
 export default function Footer() {
+  const classes = useStyles();
   return (
-      <AppBar position="static" color="primary">
+    <AppBar position="relative" color="primary" className={classes.appBar}>
+      <Toolbar>
         <Container maxWidth="md">
           <Toolbar>
             <Typography variant="body1" color="inherit">
@@ -10,6 +23,7 @@ export default function Footer() {
             </Typography>
           </Toolbar>
         </Container>
-      </AppBar>
-  )
+      </Toolbar>
+    </AppBar>
+  );
 }

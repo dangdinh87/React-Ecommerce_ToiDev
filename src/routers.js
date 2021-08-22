@@ -15,11 +15,6 @@ const routes = [
     main: () => <ProductFeature />,
   },
   {
-    path: "/todo",
-    exact: false,
-    main: () => <Todo />,
-  },
-  {
     path: "/cart",
     exact: false,
     main: () => <CartFeature />,
